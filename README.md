@@ -1,4 +1,4 @@
-# Youtube-topic-fetcher-for-Irssi
+# Youtube-title-fetcher-for-Irssi
 Perl script for Irssi to fetch titles of videos from Youtube links.
 
 Uses Youtube API to fetch the topic of a video from a link posted in a channel and posts the topic to the channel.
