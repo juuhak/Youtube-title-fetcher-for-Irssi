@@ -4,6 +4,14 @@ use Irssi;
 use LWP::UserAgent;
 
 
+sub strip_json_escape {
+
+    my $string = shift;
+    $string =~ s/\\\"/\"/g;
+    $string =~ s/\\\\/\\/g;
+    return $string;
+}
+
 sub youtube_query {
 
     my $url = shift;
@@ -24,7 +32,10 @@ sub youtube_query {
     
     my $title_decoded = decode_entities($title);
     
-    if ($target =~ m/#(?:sigh|asd098asd)/) {
+    $title_decoded = strip_json_escape($title_decoded);
+    # CHANNEL(S) HERE
+    my $channels = "CHANNEL|CHANNEL2";
+    if ($target =~ m/#(?:$channels)/) {
 	
 	if ($res->is_success()){
 	    	
@@ -46,8 +57,7 @@ sub youtube_query {
 
 
 sub message_public {
-
-    # Insert Youtube API key here
+    # API KEY HERE
     use constant API_KEY => "API KEY HERE";
     
     my ($server,$msg,$nick,$address,$target) = @_;
@@ -55,7 +65,7 @@ sub message_public {
     
     if ($msg =~ /(www\.|m\.)youtube\.com\/watch\?.*v=(.{11})/) {
 	if ($msg =~ /(www\.|m\.)(youtube\.com\/watch\?.*v=.{11})\S*( \*)/) {
-	    # print "Not getting link";
+	    print "Not getting link";
 	    return;
 	}
 	$id = $2;
@@ -63,7 +73,7 @@ sub message_public {
     
     if ($msg =~ /https?\:\/\/(www.)?\youtu\.be\/(.{11})/) {
 	if ($msg =~ /https?\:\/\/(www.)?\youtu\.be\/(.{11})\S*( \*)/) {
-	    # print "Not getting link";
+	    print "Not getting link";
 	    return;
 	}
 	$id = $2;
