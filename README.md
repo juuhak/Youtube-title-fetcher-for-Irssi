@@ -5,4 +5,6 @@ Uses Youtube API to fetch the topic of a video from a link posted in a channel a
 
 Insert Youtube API key and active channel(s) into the script at commented spots.
 
-Put the script to <code>~/.irssi/scripts/</code> and in Irssi do <code>/script load youtubetitle_v2.pl</code>
+Put the script to `~/.irssi/scripts/` and in Irssi do `/script load youtubetitle_v2.pl`
+
+Ignores links that have ` *` after the link. Ie. `https://www.youtube.com/watch?v=<id> *`
